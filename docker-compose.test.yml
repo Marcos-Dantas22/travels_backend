@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  test:
+    build: .
+    container_name: travels_backend_tests
+    command: ["./wait-for-it.sh", "db_test:5432", "--", "pytest", "--disable-warnings", "-v"]
+    volumes:
+      - .:/app
+    env_file:
+      - .env.test
+    depends_on:
+      - db_test
+
+  db_test:
+    image: postgres:15
+    container_name: postgres_db_test
+    restart: always
+    env_file:
+      - .env.test
+    volumes:
+      - travels_db_postgres_data_test:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+volumes:
+  travels_db_postgres_data_test:
