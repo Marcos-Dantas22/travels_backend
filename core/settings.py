@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # <- Django REST Framework
     'api',             # <- Seu app
+    'accounts',
+    
 ]
 
 # (opcional) Configuração básica do DRF
